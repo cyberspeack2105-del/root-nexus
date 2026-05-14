@@ -8,7 +8,7 @@ import { portfolioData } from "@/data/portfolio";
 
 export default function WorkSection() {
   return (
-    <section id="work" className="py-24 relative overflow-hidden">
+    <section id="work" className="py-16 md:py-24 relative overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 space-y-4 md:space-y-0">
           <div>
@@ -36,33 +36,48 @@ export default function WorkSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="group cursor-pointer"
+              className="group"
             >
-              <Link href={`/work/${project.slug}`}>
-                <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden mb-6">
-                  <div className="absolute inset-0 bg-primary/20 mix-blend-overlay z-10 group-hover:opacity-0 transition-opacity duration-500" />
+              <Link href={`/work/${project.slug}`} className="block">
+                <div className="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden mb-8 border border-white/5 glass-dark shadow-xl">
+                  <div className="absolute inset-0 bg-primary/10 mix-blend-overlay z-10 group-hover:opacity-0 transition-opacity duration-500" />
                   <Image
                     src={project.image}
                     alt={project.title}
                     fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  <div className="absolute top-4 right-4 z-20 w-12 h-12 bg-black/50 backdrop-blur-md rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:-translate-y-1 group-hover:translate-x-1">
-                    <ArrowUpRight className="w-6 h-6 text-white" />
+                  
+                  {/* Hover Overlay */}
+                  <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-300 z-20 flex flex-col items-center justify-center">
+                    <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 shadow-lg shadow-primary/40">
+                      <ArrowUpRight className="w-8 h-8 text-white" />
+                    </div>
+                    <span className="text-white font-bold tracking-widest uppercase text-xs transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">
+                      View Case Study
+                    </span>
                   </div>
-                </div>
-                <div>
-                  <div className="flex items-center space-x-3 mb-3">
-                    <span className="text-xs font-bold text-primary tracking-wider uppercase px-3 py-1 glass rounded-full">
+
+                  <div className="absolute top-6 left-6 z-30">
+                    <span className="text-[10px] font-bold text-white tracking-[0.2em] uppercase px-4 py-2 bg-black/50 backdrop-blur-md rounded-full border border-white/10">
                       {project.category}
                     </span>
                   </div>
-                  <h4 className="text-2xl font-bold mb-2 group-hover:text-primary transition-colors">
+                </div>
+                
+                <div className="px-1 md:px-2">
+                  <h4 className="text-2xl md:text-3xl font-display font-bold mb-3 md:mb-4 group-hover:text-primary transition-colors leading-tight">
                     {project.title}
                   </h4>
-                  <p className="text-foreground/60 line-clamp-2">
+                  <p className="text-foreground/50 text-base md:text-lg leading-relaxed line-clamp-2 font-light">
                     {project.shortDescription}
                   </p>
+                  
+                  <div className="mt-4 md:mt-6 flex items-center space-x-2 text-primary font-bold text-xs md:text-sm tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span>Read More</span>
+                    <ArrowRight className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                  </div>
                 </div>
               </Link>
             </motion.div>

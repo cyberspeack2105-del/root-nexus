@@ -120,7 +120,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 </div>
               </div>
               <Link
-                href="/#contact"
+                href="https://wa.me/917012402892"
+                target="_blank"
                 className="text-primary font-bold hover:underline underline-offset-8"
               >
                 Discuss this project →

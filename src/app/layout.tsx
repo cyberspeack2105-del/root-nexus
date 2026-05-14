@@ -14,12 +14,22 @@ const outfit = Outfit({
 
 export const metadata: Metadata = {
   title: "Root Nexus | Connecting Ideas with Technology",
-  description: "Root Nexus builds future-ready digital solutions through web development, digital marketing, automation, and smart digital experiences.",
-  keywords: ["Web Development", "Digital Marketing", "Automation", "AI", "Smart Digital Experiences", "Root Nexus", "Kanthalloor", "Kerala"],
+  description: "Root Nexus is a premier digital agency building future-ready web development, digital marketing, and AI automation solutions for businesses in Udumalaipet, Coimbatore, Munnar, Marayoor, and Kanthalloor.",
+  keywords: [
+    "Web Development Udumalaipet", 
+    "Digital Marketing Coimbatore", 
+    "AI Automation Munnar", 
+    "Web Design Marayoor", 
+    "Software company in Kanthalloor", 
+    "Web Development Coimbatore", 
+    "Digital Agency Udumalaipet", 
+    "Root Nexus", 
+    "Smart Digital Experiences"
+  ],
   authors: [{ name: "Root Nexus" }],
   openGraph: {
     title: "Root Nexus | Connecting Ideas with Technology",
-    description: "Root Nexus builds future-ready digital solutions through web development, digital marketing, automation, and smart digital experiences.",
+    description: "Root Nexus is a premier digital agency building future-ready web development, digital marketing, and AI automation solutions for businesses in Udumalaipet, Coimbatore, Munnar, Marayoor, and Kanthalloor.",
     url: "https://rootnexus.com",
     siteName: "Root Nexus",
     images: [
@@ -36,7 +46,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Root Nexus | Connecting Ideas with Technology",
-    description: "Root Nexus builds future-ready digital solutions through web development, digital marketing, automation, and smart digital experiences.",
+    description: "Root Nexus is a premier digital agency building future-ready web development, digital marketing, and AI automation solutions for businesses in Udumalaipet, Coimbatore, Munnar, Marayoor, and Kanthalloor.",
     images: ["/logo.png"],
   },
 };
@@ -45,6 +55,7 @@ import FixedLogo from "@/components/FixedLogo";
 import FloatingActions from "@/components/FloatingActions";
 
 import AIAssistant from "@/components/AIAssistant";
+import { Providers } from "@/components/Providers";
 
 export default function RootLayout({
   children,
@@ -57,9 +68,11 @@ export default function RootLayout({
       className={`${inter.variable} ${outfit.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground selection:bg-primary/30 selection:text-primary">
-        <FloatingActions />
-        <AIAssistant />
-        {children}
+        <Providers>
+          <FloatingActions />
+          <AIAssistant />
+          {children}
+        </Providers>
       </body>
     </html>
   );

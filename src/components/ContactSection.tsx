@@ -23,7 +23,7 @@ export default function ContactSection() {
   }
 
   return (
-    <section id="contact" className="py-24 relative overflow-hidden bg-grid">
+    <section id="contact" className="py-16 md:py-24 relative overflow-hidden bg-grid">
       <div className="container mx-auto px-6">
         <div className="max-w-5xl mx-auto glass-dark rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl">
           <div className="grid grid-cols-1 lg:grid-cols-2">
@@ -62,8 +62,7 @@ export default function ContactSection() {
                 </div>
               </div>
 
-              {/* Decorative Blob */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-primary/20 rounded-full blur-[80px] -z-0" />
+              {/* Removed Decorative Blob */}
             </div>
 
             {/* Contact Form */}

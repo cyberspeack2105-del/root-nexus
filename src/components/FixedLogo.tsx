@@ -13,7 +13,7 @@ export default function FixedLogo() {
       <Link href="/" className="block group">
         <div className="relative w-24 h-16 md:w-[400px] md:h-[200px] flex items-center justify-center transition-all duration-500 hover:scale-105">
           <img
-            src="/nex.png"
+            src="/nexGoogle: Gemma 4 26B A4B (free).png"
             alt="Root Nexus Fixed Logo"
             className="w-full h-full object-contain mix-blend-multiply"
           />

@@ -44,7 +44,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.21, 0.47, 0.32, 0.98] }}
-            className="text-5xl md:text-8xl font-display font-bold leading-tight mb-8"
+            className="text-4xl md:text-8xl font-display font-bold leading-tight mb-8"
           >
             Connect Your Vision to the{" "}
             <span className="text-gradient">Digital Ecosystem</span>
@@ -69,7 +69,8 @@ export default function Hero() {
           >
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
-                href="#contact"
+                href="https://wa.me/917012402892"
+                target="_blank"
                 className="w-full sm:w-auto bg-primary text-black px-10 py-5 rounded-full font-bold text-lg flex items-center justify-center space-x-3 shadow-[0_0_30px_-5px_rgba(0,209,255,0.4)]"
               >
                 <span>Get Started</span>
@@ -88,27 +89,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Hero Visual Element */}
-      <motion.div
-        initial={{ opacity: 0, y: 100 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.2, delay: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-5xl aspect-video glass rounded-t-[3rem] border-b-0 border-white/10 hidden md:block overflow-hidden"
-      >
-        <div className="w-full h-full bg-gradient-to-t from-background to-transparent absolute inset-0 z-10" />
-        <div className="p-8">
-           <div className="flex items-center space-x-2 mb-8 opacity-50">
-             <div className="w-3 h-3 rounded-full bg-red-500" />
-             <div className="w-3 h-3 rounded-full bg-yellow-500" />
-             <div className="w-3 h-3 rounded-full bg-green-500" />
-           </div>
-           <div className="grid grid-cols-3 gap-6">
-             {[1, 2, 3].map((i) => (
-               <div key={i} className="h-40 glass rounded-2xl animate-pulse" />
-             ))}
-           </div>
-        </div>
-      </motion.div>
     </section>
+
   );
 }

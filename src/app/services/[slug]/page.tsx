@@ -74,7 +74,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
             <div className="pt-8">
               <Link 
-                href="/#contact"
+                href="https://wa.me/917012402892"
+                target="_blank"
                 className="inline-flex items-center px-8 py-4 rounded-full bg-primary text-black font-bold hover:bg-primary/90 transition-all hover:scale-105"
               >
                 Start Your Project

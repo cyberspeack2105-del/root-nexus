@@ -57,7 +57,8 @@ export default function Navbar() {
               </Link>
             ))}
             <Link
-              href="#contact"
+              href="https://wa.me/917012402892"
+              target="_blank"
               className="bg-primary hover:bg-primary/90 text-black px-6 py-2.5 rounded-full text-sm font-bold flex items-center space-x-2 transition-all transform hover:scale-105"
             >
               <span>Start Your Project</span>
@@ -82,22 +83,23 @@ export default function Navbar() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="absolute top-full left-0 right-0 bg-white border-t border-gray-100 md:hidden overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)]"
+            className="absolute top-full left-0 right-0 glass-dark border-t border-white/5 md:hidden overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-[60]"
           >
             <div className="flex flex-col p-8 space-y-6">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="text-xl font-bold text-gray-900 hover:text-primary transition-colors flex items-center justify-between"
+                  className="text-xl font-bold text-white hover:text-primary transition-colors flex items-center justify-between"
                   onClick={() => setIsOpen(false)}
                 >
                   <span>{link.name}</span>
-                  <ArrowRight className="w-5 h-5 text-gray-300" />
+                  <ArrowRight className="w-5 h-5 text-white/20" />
                 </Link>
               ))}
               <Link
-                href="#contact"
+                href="https://wa.me/917012402892"
+                target="_blank"
                 className="bg-primary text-black text-center py-5 rounded-2xl font-bold text-lg flex items-center justify-center space-x-3 shadow-lg shadow-primary/20"
                 onClick={() => setIsOpen(false)}
               >

@@ -202,7 +202,8 @@ export default function AboutPage() {
               something future-ready together.
             </p>
             <Link 
-              href="/#contact"
+              href="https://wa.me/917012402892"
+              target="_blank"
               className="inline-flex items-center px-12 py-5 rounded-full bg-primary text-black font-bold hover:bg-primary/90 transition-all hover:scale-105 shadow-xl shadow-primary/20 group"
             >
               <span>Get in Touch</span>
