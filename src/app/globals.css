@@ -46,7 +46,10 @@ body {
 }
 
 .text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#FFD700] via-[#00F2FF] to-[#00D1FF];
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(to right, #FFD700, #00F2FF, #00D1FF);
   text-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
 }
 

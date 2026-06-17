@@ -5,8 +5,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: '/private/',
+      disallow: ['/private/', '/rn-secure-admin/'],
     },
-    sitemap: 'https://rootnexus.com/sitemap.xml', // Replace with actual domain
+    sitemap: 'https://rootnexus.com/sitemap.xml',
   }
 }

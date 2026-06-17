@@ -1,82 +1,107 @@
-"use client";
-
-import { motion } from "framer-motion";
-import Link from "next/link";
-import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
-import { portfolioData } from "@/data/portfolio";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { getAllProjects } from "@/lib/db";
+import { serializeProjects } from "@/lib/serialize";
+import FeaturedProjectsSection from "@/components/work/FeaturedProjectsSection";
+import ProjectGrid from "@/components/work/ProjectGrid";
 
-export default function WorkListPage() {
+export const revalidate = 86400; // 24h ISR
+
+export default async function WorkListPage() {
+  let projects = await getAllProjects().catch(() => []);
+  const serialized = serializeProjects(projects);
+
+  const hasFeatured = serialized.some(p => p.isFeatured);
+
   return (
     <main className="min-h-screen bg-background text-foreground">
       <Navbar />
 
-      {/* Hero Section */}
-      <section className="pt-40 pb-20 relative overflow-hidden bg-grid">
+      {/* ── Hero ── */}
+      <section className="pt-40 pb-16 relative overflow-hidden bg-grid">
+        {/* Ambient glows */}
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-secondary/10 rounded-full blur-[100px] pointer-events-none" />
+
         <div className="container mx-auto px-6 text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-3xl mx-auto"
-          >
-            <h2 className="text-sm font-bold text-primary tracking-widest uppercase mb-4">
+          <div className="max-w-4xl mx-auto">
+            <p className="text-xs font-bold text-primary tracking-[0.35em] uppercase mb-5">
               Our Portfolio
-            </h2>
-            <h1 className="text-5xl md:text-7xl font-display font-bold mb-8 leading-tight">
-              Crafting Digital <span className="text-gradient">Masterpieces</span>
-            </h1>
-            <p className="text-xl text-foreground/60 leading-relaxed">
-              Discover how we connect foundational roots with modern digital nexus 
-              to drive real-world results for our clients.
             </p>
-          </motion.div>
+            <h1 className="text-5xl md:text-7xl font-display font-bold mb-6 leading-tight">
+              Crafting Digital{" "}
+              <span className="text-gradient">Masterpieces</span>
+            </h1>
+            <p className="text-lg md:text-xl text-foreground/50 leading-relaxed max-w-2xl mx-auto">
+              Discover how we connect foundational roots with modern digital
+              nexus to drive real-world results for our clients.
+            </p>
+
+            {/* Stats row */}
+            <div className="flex items-center justify-center gap-10 mt-12">
+              {[
+                { label: 'Projects Delivered', value: `${serialized.length}+` },
+                { label: 'Happy Clients', value: '100%' },
+                { label: 'Industries', value: `${new Set(serialized.map(p => p.category)).size}` },
+              ].map((stat) => (
+                <div key={stat.label} className="text-center">
+                  <p className="text-2xl md:text-3xl font-display font-bold text-primary">{stat.value}</p>
+                  <p className="text-xs text-foreground/40 tracking-wider mt-1">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Portfolio Grid */}
-      <section className="py-24">
+      {/* ── Featured Projects ── */}
+      {hasFeatured && <FeaturedProjectsSection projects={serialized} />}
+
+      {/* ── All Projects Grid ── */}
+      <section id="all-projects" className="py-20">
         <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-            {portfolioData.map((project, index) => (
-              <motion.div
-                key={project.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="group cursor-pointer"
-              >
-                <Link href={`/work/${project.slug}`}>
-                  <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden mb-8 border border-white/10 glass-dark">
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <div className="absolute top-6 right-6 z-20 w-12 h-12 bg-black/50 backdrop-blur-md rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:-translate-y-1 group-hover:translate-x-1">
-                      <ArrowUpRight className="w-6 h-6 text-white" />
-                    </div>
-                  </div>
-                  <div>
-                    <div className="flex items-center space-x-3 mb-4">
-                      <span className="text-xs font-bold text-primary tracking-wider uppercase px-4 py-1.5 glass rounded-full">
-                        {project.category}
-                      </span>
-                    </div>
-                    <h4 className="text-3xl font-bold mb-3 group-hover:text-primary transition-colors">
-                      {project.title}
-                    </h4>
-                    <p className="text-foreground/60 text-lg line-clamp-2 leading-relaxed">
-                      {project.shortDescription}
-                    </p>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
+          <div className="flex items-end justify-between mb-10">
+            <div>
+              <p className="text-xs font-bold text-primary tracking-[0.3em] uppercase mb-3">
+                {hasFeatured ? 'All Work' : 'Our Work'}
+              </p>
+              <h2 className="text-3xl md:text-4xl font-display font-bold">
+                {hasFeatured ? 'Every Project' : 'Case Studies'}
+              </h2>
+            </div>
+            <p className="text-sm text-foreground/30 hidden md:block">
+              {serialized.length} {serialized.length === 1 ? 'project' : 'projects'}
+            </p>
+          </div>
+
+          <ProjectGrid projects={serialized} />
+        </div>
+      </section>
+
+      {/* ── CTA Banner ── */}
+      <section className="py-20 border-t border-white/5">
+        <div className="container mx-auto px-6">
+          <div className="glass rounded-[2rem] p-10 md:p-16 text-center relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-secondary/5 pointer-events-none" />
+            <p className="text-xs font-bold text-primary tracking-[0.3em] uppercase mb-4 relative z-10">
+              Ready to build something great?
+            </p>
+            <h2 className="text-3xl md:text-5xl font-display font-bold mb-6 relative z-10">
+              Let&apos;s create your next{" "}
+              <span className="text-gradient">success story</span>
+            </h2>
+            <p className="text-foreground/50 max-w-xl mx-auto mb-8 relative z-10">
+              Join our growing list of satisfied clients and see how Root Nexus
+              can transform your digital presence.
+            </p>
+            <a
+              href="https://wa.me/919715555430"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-primary text-black font-bold rounded-2xl hover:bg-primary/90 transition-all transform hover:-translate-y-1 active:scale-95 relative z-10"
+            >
+              Start Your Project
+            </a>
           </div>
         </div>
       </section>

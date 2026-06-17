@@ -52,9 +52,7 @@ export const metadata: Metadata = {
 };
 
 import FixedLogo from "@/components/FixedLogo";
-import FloatingActions from "@/components/FloatingActions";
-
-import AIAssistant from "@/components/AIAssistant";
+import ClientLayoutGuard from "@/components/ClientLayoutGuard";
 import { Providers } from "@/components/Providers";
 
 export default function RootLayout({
@@ -69,8 +67,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-background text-foreground selection:bg-primary/30 selection:text-primary">
         <Providers>
-          <FloatingActions />
-          <AIAssistant />
+          <ClientLayoutGuard />
           {children}
         </Providers>
       </body>
