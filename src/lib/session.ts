@@ -3,20 +3,19 @@ import { SignJWT, jwtVerify } from 'jose'
 import { cookies } from 'next/headers'
 import type { SessionPayload } from '@/types/admin'
 
-// Validate session secret at module load
-const secretString = process.env.ADMIN_SESSION_SECRET
-if (!secretString) {
-  throw new Error('Missing required environment variable: ADMIN_SESSION_SECRET')
-}
-const decoded = Buffer.from(secretString, 'base64')
-if (decoded.length < 32) {
-  throw new Error(
-    'ADMIN_SESSION_SECRET must be at least 32 bytes when decoded from base64'
-  )
-}
-
+// Defer secret validation to runtime (not build time) so Vercel builds succeed
 function getSecretKey(): Uint8Array {
-  return new Uint8Array(Buffer.from(process.env.ADMIN_SESSION_SECRET!, 'base64'))
+  const secretString = process.env.ADMIN_SESSION_SECRET
+  if (!secretString) {
+    throw new Error('Missing required environment variable: ADMIN_SESSION_SECRET')
+  }
+  const decoded = Buffer.from(secretString, 'base64')
+  if (decoded.length < 32) {
+    throw new Error(
+      'ADMIN_SESSION_SECRET must be at least 32 bytes when decoded from base64'
+    )
+  }
+  return new Uint8Array(decoded)
 }
 
 export async function encrypt(payload: SessionPayload): Promise<string> {
